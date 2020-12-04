@@ -1,17 +1,22 @@
 const express = require('express')
 const Recipe = require('../../models/recipes')
+const upload = require('../../middleware/uploadImage')
 const router = express.Router()
 
 //* Post req - Create a new Recipe
-router.post('/recipes' , async (req , res) => {
+router.post('/recipes',
+upload.single('photo')
+,async (req , res) => {
     try {
-        let recipe = new Recipe()
+    
+    let recipe = new Recipe()
     recipe.title = req.body.title
-    recipe.photo = req.body.photo
+    recipe.photo = req.file.filename
     recipe.items = req.body.items
     recipe.people = req.body.people
     recipe.description = req.body.description
 
+    
     await recipe.save()
 
     res.json({
