@@ -22,8 +22,10 @@ app.use(express.urlencoded({
 
 //* routes
 const RecipeRoutes = require('./routes/api/recipe')
+const UserRoutes = require('./routes/api/user')
 
 app.use('/api' , RecipeRoutes)
+app.use('/api' , UserRoutes)
 
 
 const PORT = process.env.PORT || 3000;
